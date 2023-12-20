@@ -25,21 +25,52 @@ interface ChartData {
 }
 
 function formatPriceData(data: any) {
-  // const chartLabels = data.map((price: any) =>
-  //   new Date(price.timestamp).toLocaleTimeString([], {
-  //     hour: '2-digit',
-  //     minute: '2-digit',
-  //   }),
-  // );
-  // lineChartOptionsRed.xaxis['categories'] = chartLabels;
-  // lineChartOptionsGreen.xaxis['categories'] = chartLabels;
-  // lineChartOptionsBlue.xaxis['categories'] = chartLabels;
+  const chartLabels = data.map((price: any) =>
+    new Date(price.timestamp).toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+  );
+  let slowHighest = 0;
+  let slowLowest = Infinity;
+  let normalHighest = 0;
+  let normalLowest = Infinity;
+  let fastHighest = 0;
+  let fastLowest = Infinity;
+  data.map((price: any) => {
+    if (price.slowprice / 1e9 < slowLowest) slowLowest = price.slowprice / 1e9;
+    if (price.slowprice / 1e9 > slowHighest)
+      slowHighest = price.slowprice / 1e9;
+    if (price.mediumprice / 1e9 < normalLowest)
+      normalLowest = price.mediumprice / 1e9;
+    if (price.mediumprice / 1e9 > normalHighest)
+      normalHighest = price.mediumprice / 1e9;
+    if (price.highprice / 1e9 < fastLowest) fastLowest = price.highprice / 1e9;
+    if (price.highprice / 1e9 > fastHighest)
+      fastHighest = price.highprice / 1e9;
+  });
+  lineChartOptionsRed.xaxis['categories'] = chartLabels;
+  lineChartOptionsGreen.xaxis['categories'] = chartLabels;
+  lineChartOptionsBlue.xaxis['categories'] = chartLabels;
+  lineChartOptionsGreen.annotations.yaxis[1]['y'] = slowLowest;
+  lineChartOptionsGreen.annotations.yaxis[1]['label']['text'] = slowLowest + '';
+  lineChartOptionsGreen.annotations.yaxis[0]['y'] = slowHighest;
+  lineChartOptionsGreen.annotations.yaxis[0]['label']['text'] =
+    slowHighest + '';
+  lineChartOptionsBlue.annotations.yaxis[1]['y'] = normalLowest;
+  lineChartOptionsBlue.annotations.yaxis[1]['label']['text'] =
+    normalLowest + '';
+  lineChartOptionsBlue.annotations.yaxis[0]['y'] = normalHighest;
+  lineChartOptionsBlue.annotations.yaxis[0]['label']['text'] =
+    normalHighest + '';
+  lineChartOptionsRed.annotations.yaxis[1]['y'] = fastLowest;
+  lineChartOptionsRed.annotations.yaxis[1]['label']['text'] = fastLowest + '';
+  lineChartOptionsRed.annotations.yaxis[0]['y'] = fastHighest;
+  lineChartOptionsRed.annotations.yaxis[0]['label']['text'] = fastHighest + '';
   const formattedData = {
     slowPrices: {
       name: 'Slow Price',
-      data: data.map((item: any) => {
-        parseFloat(item.slowprice) / 1e9;
-      }),
+      data: data.map((item: any) => parseFloat(item.slowprice) / 1e9),
     },
     mediumPrices: {
       name: 'Normal Price',
@@ -72,10 +103,11 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
       </div>
 
       <div className="mt-18 relative mx-auto mb-20 grid h-fit w-full max-w-[375px] grid-cols-1 gap-3  px-3 md:mb-[160px] xl:mt-16 xl:max-w-full xl:grid-cols-3 2xl:max-w-max">
-        <Card extra="w-full h-full rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonGreen-200 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonGreen-300 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Slow Price
           </h5>
+          <div className="flex-grow"></div> {/* Spacer */}
           {gasPrices && (
             <LineChart
               chartData={formatChartData.slowPrices}
@@ -85,10 +117,11 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
         </Card>
 
         {/* Normal Price Chart */}
-        <Card extra="w-full h-full rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonBlue-500 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonBlue-300 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Normal Price
           </h5>
+          <div className="flex-grow"></div> {/* Spacer */}
           {gasPrices && (
             <LineChart
               chartData={formatChartData.mediumPrices}
@@ -97,11 +130,11 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
           )}
         </Card>
 
-        {/* Fast Price Chart */}
-        <Card extra="w-full h-full rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonRed-200 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonRed-300 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Fast Price
           </h5>
+          <div className="flex-grow"></div> {/* Spacer */}
           {gasPrices && (
             <LineChart
               chartData={formatChartData.highPrices}

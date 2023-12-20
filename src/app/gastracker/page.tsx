@@ -31,5 +31,5 @@ export default async function GasTrackerPage() {
     return <div>Loading...</div>; // Or any other placeholder
   }
 
-  return data ? <GasPrice gasPrices={data} /> : <div>Loading data...</div>;
+  return data ? <GasPrice gasPrices={data} /> : <div></div>;
 }

@@ -134,7 +134,7 @@ export const lineChartOptionsGreen = {
   colors: ['#01935D', '#01935D'],
   markers: {
     size: 0,
-    colors: 'white',
+    colors: '#01935D',
     strokeColors: '#7551FF',
     strokeWidth: 3,
     strokeOpacity: 0.9,
@@ -157,6 +157,9 @@ export const lineChartOptionsGreen = {
     type: 'line',
   },
   xaxis: {
+    axisBorder: {
+      color: '#01935D',
+    },
     labels: {
       show: false, // This will hide the x-axis labels
     },
@@ -175,6 +178,34 @@ export const lineChartOptionsGreen = {
     },
   },
   color: ['#ea0606', '#ea0606'],
+  annotations: {
+    yaxis: [
+      {
+        y: 0,
+        borderColor: '#FF4560',
+        label: {
+          borderColor: '#FF4560',
+          style: {
+            color: '#fff',
+            background: '#FF4560',
+          },
+          text: 'Lowest',
+        },
+      },
+      {
+        y: 0,
+        borderColor: '#00E396',
+        label: {
+          borderColor: '#00E396',
+          style: {
+            color: '#fff',
+            background: '#00E396',
+          },
+          text: 'Highest',
+        },
+      },
+    ],
+  },
 };
 
 export const lineChartOptionsBlue = {
@@ -235,6 +266,34 @@ export const lineChartOptionsBlue = {
     },
   },
   color: ['#ea0606', '#ea0606'],
+  annotations: {
+    yaxis: [
+      {
+        y: 0,
+        borderColor: '#FF4560',
+        label: {
+          borderColor: '#FF4560',
+          style: {
+            color: '#fff',
+            background: '#FF4560',
+          },
+          text: 'Lowest',
+        },
+      },
+      {
+        y: 0,
+        borderColor: '#00E396',
+        label: {
+          borderColor: '#00E396',
+          style: {
+            color: '#fff',
+            background: '#00E396',
+          },
+          text: 'Highest',
+        },
+      },
+    ],
+  },
 };
 
 export const lineChartOptionsRed = {
@@ -295,6 +354,34 @@ export const lineChartOptionsRed = {
     },
   },
   color: ['#ea0606', '#ea0606'],
+  annotations: {
+    yaxis: [
+      {
+        y: 0,
+        borderColor: '#FF4560',
+        label: {
+          borderColor: '#FF4560',
+          style: {
+            color: '#fff',
+            background: '#FF4560',
+          },
+          text: 'Lowest',
+        },
+      },
+      {
+        y: 0,
+        borderColor: '#00E396',
+        label: {
+          borderColor: '#00E396',
+          style: {
+            color: '#fff',
+            background: '#00E396',
+          },
+          text: 'Highest',
+        },
+      },
+    ],
+  },
 };
 
 // Daily Traffic Dashboards Default
