@@ -115,13 +115,9 @@ export const lineChartDataOverallRevenue = [
     name: 'Revenue',
     data: [50, 64, 48, 66, 49, 68],
   },
-  {
-    name: 'Profit',
-    data: [30, 40, 24, 46, 20, 46],
-  },
 ];
 
-export const lineChartOptionsOverallRevenue = {
+export const lineChartOptionsGreen = {
   chart: {
     toolbar: {
       show: false,
@@ -132,10 +128,10 @@ export const lineChartOptionsOverallRevenue = {
       left: 0,
       blur: 10,
       opacity: 0.1,
-      color: '#4318FF',
+      color: '#01935D',
     },
   },
-  colors: ['#4318FF', '#39B8FF'],
+  colors: ['#01935D', '#01935D'],
   markers: {
     size: 0,
     colors: 'white',
@@ -161,19 +157,8 @@ export const lineChartOptionsOverallRevenue = {
     type: 'line',
   },
   xaxis: {
-    categories: ['SEP', 'OCT', 'NOV', 'DEC', 'JAN', 'FEB'],
     labels: {
-      style: {
-        colors: '#A3AED0',
-        fontSize: '12px',
-        fontWeight: '500',
-      },
-    },
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
+      show: false, // This will hide the x-axis labels
     },
   },
   yaxis: {
@@ -189,8 +174,129 @@ export const lineChartOptionsOverallRevenue = {
       opacity: 0.5,
     },
   },
-  color: ['#7551FF', '#39B8FF'],
+  color: ['#ea0606', '#ea0606'],
 };
+
+export const lineChartOptionsBlue = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    dropShadow: {
+      enabled: true,
+      top: 13,
+      left: 0,
+      blur: 10,
+      opacity: 0.1,
+      color: '#0036FA',
+    },
+  },
+  colors: ['#0036FA', '#0036FA'],
+  markers: {
+    size: 0,
+    colors: 'white',
+    strokeColors: '#7551FF',
+    strokeWidth: 3,
+    strokeOpacity: 0.9,
+    strokeDashArray: 0,
+    fillOpacity: 1,
+    shape: 'circle',
+    radius: 2,
+    offsetX: 0,
+    offsetY: 0,
+    showNullDataPoints: true,
+  },
+  tooltip: {
+    theme: 'dark',
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: 'smooth',
+    type: 'line',
+  },
+  xaxis: {
+    labels: {
+      show: false, // This will hide the x-axis labels
+    },
+  },
+  yaxis: {
+    show: false,
+  },
+  legend: {
+    show: false,
+  },
+  grid: {
+    show: false,
+    column: {
+      color: ['#7551FF', '#39B8FF'],
+      opacity: 0.5,
+    },
+  },
+  color: ['#ea0606', '#ea0606'],
+};
+
+export const lineChartOptionsRed = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    dropShadow: {
+      enabled: true,
+      top: 13,
+      left: 0,
+      blur: 10,
+      opacity: 0.1,
+      color: '#ea0606',
+    },
+  },
+  colors: ['#ea0606', '#ea0606'],
+  markers: {
+    size: 0,
+    colors: 'white',
+    strokeColors: '#7551FF',
+    strokeWidth: 3,
+    strokeOpacity: 0.9,
+    strokeDashArray: 0,
+    fillOpacity: 1,
+    shape: 'circle',
+    radius: 2,
+    offsetX: 0,
+    offsetY: 0,
+    showNullDataPoints: true,
+  },
+  tooltip: {
+    theme: 'dark',
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: 'smooth',
+    type: 'line',
+  },
+  xaxis: {
+    labels: {
+      show: false, // This will hide the x-axis labels
+    },
+  },
+  yaxis: {
+    show: false,
+  },
+  legend: {
+    show: false,
+  },
+  grid: {
+    show: false,
+    column: {
+      color: ['#7551FF', '#39B8FF'],
+      opacity: 0.5,
+    },
+  },
+  color: ['#ea0606', '#ea0606'],
+};
+
 // Daily Traffic Dashboards Default
 
 export const barChartDataDailyTraffic = [
