@@ -90,7 +90,7 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
 
   return (
     <div className="relative h-full w-full px-3 font-dm dark:bg-navy-900">
-      <div className="w-100% -z-1 absolute left-0 right-0 max-h-[60vh] min-h-[26vh] overflow-hidden bg-gradient-to-br from-brand-400 to-brand-600 bg-cover bg-no-repeat md:mx-auto" />
+      <div className="w-100% -z-1 absolute left-0 right-0 max-h-[80vh] min-h-[40vh] overflow-hidden bg-gradient-to-br from-brand-400 to-brand-600 bg-cover bg-no-repeat md:mx-auto" />
 
       <div className="z-1 relative mb-[200px]">
         <NavbarAuth onOpenSidenav={() => {}} />
