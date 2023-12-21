@@ -103,7 +103,7 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
       </div>
 
       <div className="mt-18 relative mx-auto mb-20 grid h-fit w-full max-w-[375px] grid-cols-1 gap-3  px-3 md:mb-[160px] xl:mt-16 xl:max-w-full xl:grid-cols-3 2xl:max-w-max">
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonGreen-300 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonGreen-100 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Slow Price
           </h5>
@@ -117,7 +117,7 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
         </Card>
 
         {/* Normal Price Chart */}
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonBlue-300 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonBlue-100 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Normal Price
           </h5>
@@ -130,7 +130,7 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
           )}
         </Card>
 
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonRed-300 min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] pb-6 pt-8 px-[20px] bg-horizonRed-100 min-h-[380px] min-w-[280px]">
           <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
             Fast Price
           </h5>
