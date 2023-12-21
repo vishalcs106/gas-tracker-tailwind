@@ -1,5 +1,4 @@
 import React from 'react';
-import { Analytics } from '@vercel/analytics/react';
 
 export default function RootHead() {
   return (
@@ -15,7 +14,6 @@ export default function RootHead() {
       <title>Horizon UI PRO NextJS</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#000000" />
-      <Analytics />
     </>
   );
 }
