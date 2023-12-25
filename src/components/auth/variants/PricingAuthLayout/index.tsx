@@ -1,6 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { track } from '@vercel/analytics';
 import NavbarAuth from 'components/navbar/NavbarAuth';
+import SolidSubtleAlert from 'utils/SolidSubtleAlert';
 import Card from 'components/card';
 import dynamic from 'next/dynamic';
 const LineChart = dynamic(() => import('components/charts/LineAreaChart'), {
@@ -11,6 +14,7 @@ import {
   lineChartOptionsGreen,
   lineChartOptionsBlue,
 } from 'variables/charts';
+import Footer from 'components/footer/Footer';
 
 interface GasPriceData {
   timestamp: string;
@@ -87,12 +91,27 @@ function formatPriceData(data: any) {
 
 function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
   const formatChartData = formatPriceData(gasPrices);
-
+  const [showToast, setShowToast] = useState(false);
+  const handleCopy = () => {
+    track('Copy');
+    navigator.clipboard
+      .writeText('0x7A060178E375e3FA7F75D4c041E3F3f0b642B4c9')
+      .then(() => {
+        console.log('Text copied to clipboard');
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 1000);
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err);
+      });
+  };
   return (
-    <div className="relative h-full w-full px-3 font-dm dark:bg-navy-900">
-      <div className="w-100% -z-1 absolute left-0 right-0 max-h-[80vh] min-h-[40vh] overflow-hidden bg-gradient-to-br from-brand-400 to-brand-600 bg-cover bg-no-repeat md:mx-auto" />
+    <div className=" flex min-h-screen w-full flex-col font-dm dark:bg-navy-900">
+      <div className="w-100% -z-1 absolute left-0 right-0 max-h-[80vh] min-h-[40vh] flex-grow overflow-hidden bg-gradient-to-br from-brand-400 to-brand-600 bg-cover bg-no-repeat md:mx-auto" />
 
-      <div className="z-1 relative mb-[200px]">
+      <div className="z-1 relative mb-[120px] px-2">
         <NavbarAuth onOpenSidenav={() => {}} />
         {/* Header content */}
         <div className="mx-auto mt-[96px] flex w-full max-w-screen-sm flex-col items-center justify-center text-center md:px-3">
@@ -102,8 +121,8 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
         </div>
       </div>
 
-      <div className="mt-18 relative mx-auto mb-20 grid h-fit w-full max-w-[375px] grid-cols-1 gap-3  px-3 md:mb-[160px] xl:mt-16 xl:max-w-full xl:grid-cols-3 2xl:max-w-max">
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px]   min-h-[380px] min-w-[280px]">
+      <div className="xl:mt-18 relative mx-auto mb-3 grid h-fit w-full max-w-[375px] grid-cols-1 gap-3 px-3  xl:max-w-full xl:grid-cols-3 2xl:max-w-max">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px]   min-h-[380px] min-w-[280px] max-h-[420px]">
           <div
             className="flex flex-col justify-end"
             style={{
@@ -117,20 +136,22 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
               paddingBottom: '20px',
             }}
           >
-            <h5 className="mt-6 font-dm text-3xl font-bold text-navy-700 dark:text-white">
+            <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Slow Price
             </h5>
             <div className="flex-grow"></div> {/* Spacer */}
-            {gasPrices && (
-              <LineChart
-                chartData={formatChartData.slowPrices}
-                chartOptions={lineChartOptionsGreen}
-              />
-            )}
+            <div className="h-full">
+              {gasPrices && (
+                <LineChart
+                  chartData={formatChartData.slowPrices}
+                  chartOptions={lineChartOptionsGreen}
+                />
+              )}
+            </div>
           </div>
         </Card>
 
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px] min-h-[380px] min-w-[280px] max-h-[420px]">
           <div
             className="flex flex-col justify-end"
             style={{
@@ -144,20 +165,22 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
               paddingBottom: '20px',
             }}
           >
-            <h5 className="mt-6 font-dm text-3xl font-bold text-navy-700 dark:text-white">
+            <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Normal Price
             </h5>
             <div className="flex-grow"></div> {/* Spacer */}
-            {gasPrices && (
-              <LineChart
-                chartData={formatChartData.mediumPrices}
-                chartOptions={lineChartOptionsBlue}
-              />
-            )}
+            <div className="h-full">
+              {gasPrices && (
+                <LineChart
+                  chartData={formatChartData.mediumPrices}
+                  chartOptions={lineChartOptionsBlue}
+                />
+              )}
+            </div>
           </div>
         </Card>
 
-        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px]  min-h-[380px] min-w-[280px]">
+        <Card extra="w-full h-full flex flex-col justify-end rounded-[20px]  min-h-[380px] min-w-[280px] max-h-[420px]">
           <div
             className="flex flex-col justify-end"
             style={{
@@ -171,18 +194,66 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
               paddingBottom: '20px',
             }}
           >
-            <h5 className="mt-6 font-dm text-3xl font-bold text-navy-700 dark:text-white">
+            <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Fast Price
             </h5>
             <div className="flex-grow"></div> {/* Spacer */}
-            {gasPrices && (
-              <LineChart
-                chartData={formatChartData.highPrices}
-                chartOptions={lineChartOptionsRed}
-              />
-            )}
+            <div className="h-full">
+              {gasPrices && (
+                <LineChart
+                  chartData={formatChartData.highPrices}
+                  chartOptions={lineChartOptionsRed}
+                />
+              )}
+            </div>
           </div>
         </Card>
+      </div>
+
+      <div className="my-20 flex h-[80px] w-full flex-row items-center justify-center px-10">
+        <Card
+          extra="flex flex-col justify-center rounded-[20px]  min-h-[180px] min-w-[280px] max-h-[420px] items-center"
+          style={{ backgroundColor: '#fca5a5' }}
+        >
+          <p className="font-dm text-xl font-bold text-navy-700 dark:text-white">
+            Maintained by:
+          </p>
+          <h5 className="mb-6 font-dm text-xl font-bold text-navy-700 dark:text-white">
+            <a href="https://twitter.com/wishaleth" target="_blank">
+              @wishaleth
+            </a>
+          </h5>
+          <p className="font-dm text-xl font-bold text-navy-700 dark:text-white">
+            Tip me:
+          </p>
+          <h5
+            className="cursor-pointer font-dm text-xl font-bold text-navy-700 dark:text-white"
+            onClick={handleCopy}
+          >
+            0x7A060...B4c9 📋
+          </h5>
+        </Card>
+      </div>
+
+      <div className="flex flex-grow flex-col"></div>
+
+      {showToast && (
+        <div className="sticky bottom-10 px-10">
+          <SolidSubtleAlert
+            title="Copied to clipboard"
+            justify="justify-center"
+            icon={<BsFillCheckCircleFill />}
+            iconColor="text-white dark:!text-navy-900"
+            bg="bg-green-500 dark:!bg-green-300"
+            mb="mb-6"
+            closeBg="hover:bg-white/20 text-white dark:!text-navy-900"
+            solid="solid"
+          />
+        </div>
+      )}
+
+      <div className="sticky bottom-0 h-[60px] w-full bg-brand-700">
+        <Footer />
       </div>
     </div>
   );
