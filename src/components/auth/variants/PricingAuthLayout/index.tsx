@@ -21,6 +21,7 @@ interface GasPriceData {
   slowprice: string;
   mediumprice: string;
   highprice: string;
+  latest: string;
 }
 
 interface ChartData {
@@ -75,14 +76,17 @@ function formatPriceData(data: any) {
     slowPrices: {
       name: 'Slow Price',
       data: data.map((item: any) => parseFloat(item.slowprice) / 1e9),
+      latest: parseFloat(data[data.length - 1].slowprice) / 1e9 + '',
     },
     mediumPrices: {
       name: 'Normal Price',
       data: data.map((item: any) => parseFloat(item.mediumprice) / 1e9),
+      latest: parseFloat(data[data.length - 1].mediumprice) / 1e9 + '',
     },
     highPrices: {
       name: 'High Price',
       data: data.map((item: any) => parseFloat(item.highprice) / 1e9),
+      latest: parseFloat(data[data.length - 1].highprice) / 1e9 + '',
     },
   };
 
@@ -139,6 +143,9 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
             <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Slow Price
             </h5>
+            <h5 className="font-dm text-xl font-bold text-navy-700 dark:text-white">
+              Current: {formatChartData.slowPrices.latest} gwei
+            </h5>
             <div className="flex-grow"></div> {/* Spacer */}
             <div className="h-full">
               {gasPrices && (
@@ -168,6 +175,9 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
             <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Normal Price
             </h5>
+            <h5 className="font-dm text-xl font-bold text-navy-700 dark:text-white">
+              Current: {formatChartData.mediumPrices.latest} gwei
+            </h5>
             <div className="flex-grow"></div> {/* Spacer */}
             <div className="h-full">
               {gasPrices && (
@@ -196,6 +206,9 @@ function GasPrice({ gasPrices }: { gasPrices: GasPriceData[] }) {
           >
             <h5 className="font-dm text-3xl font-bold text-navy-700 dark:text-white">
               Fast Price
+            </h5>
+            <h5 className="font-dm text-xl font-bold text-navy-700 dark:text-white">
+              Current: {formatChartData.highPrices.latest} gwei
             </h5>
             <div className="flex-grow"></div> {/* Spacer */}
             <div className="h-full">
